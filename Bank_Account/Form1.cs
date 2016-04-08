@@ -18,13 +18,17 @@ using System.Windows.Forms;
 
 namespace Bank_Account
 {
-    public partial class frmLogin : Form
+
+    
+    struct Account  // Account structure with a Username and Password field
     {
-        struct Account  // Account structure with a Username and Password field
-        {
-            public string Username;
-            public string Password;
-        }
+        public string Username;
+        public string Password;
+    }
+
+    public  partial class frmLogin : Form
+    {
+       
 
         List<Account> AccountList = new List<Account>(); 
         public frmLogin()
@@ -93,52 +97,11 @@ namespace Bank_Account
             return punctuation;
         }
 
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(txtLoginUsername.Text))
-            {
-                toolStripStatusLabel1.Text = "No name entered";
-            }
-            else {
-
-
-                using (StreamReader sr = new StreamReader("Accounts.txt"))
-                {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        string[] data = line.Split(',');
-                        if (data[0] == txtLoginUsername.Text.Trim() &&
-                           data[1] == txtLoginPassword.Text.Trim())
-                        {
-                            // login successful
-
-                            toolStripStatusLabel1.Text = "Welcome to the system, " + txtLoginUsername.Text;
-                            break;
-
-                            //close login form and show account form
-                        }
-                        // login unsuccessful
-
-                        if (data[0] != txtLoginUsername.Text.Trim())
-                        {
-                            toolStripStatusLabel1.Text = "User name does not exist";
-                        }
-                        if (data[1] != txtLoginPassword.Text.Trim())
-                        {
-                            toolStripStatusLabel1.Text = "Incorrect Password";
-                        }
-                    }
-                }
-            }
-        }
-
         private void Registration() // add validated Registration information and create new account
 
         {
             Account newAccount = new Account();
-            newAccount.Username = txtRegUsername.Text;
+            newAccount.Username = txtRegUserName.Text;
             newAccount.Password = txtRegPassword.Text;
             AccountList.Add(newAccount); // add new account to list
 
@@ -147,7 +110,7 @@ namespace Bank_Account
                 for (int i = 0; i < AccountList.Count; i++)
                 {
                     SW.WriteLine(AccountList[i].Username + "," + AccountList[i].Password);
-                    toolStripStatusLabel1.Text = "Account created for: " + txtRegUsername.Text;
+                    toolStripStatusLabel1.Text = "Account created for: " + txtRegUserName.Text;
                 }
             }
         }
@@ -167,7 +130,7 @@ namespace Bank_Account
             const int MIN_LENGTH = 8;  // >8 characters
             string password = txtRegPassword.Text;
 
-            if (String.IsNullOrEmpty(txtRegUsername.Text))
+            if (String.IsNullOrEmpty(txtRegUserName.Text))
             {
                 toolStripStatusLabel1.Text = "No name is entered";
             }
@@ -189,8 +152,60 @@ namespace Bank_Account
                 }
                
             }
+
+        private void btnLogin_Click_1(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtLoginUserName.Text))
+            {
+                toolStripStatusLabel1.Text = "No name entered";
+            }
+            else {
+
+
+                using (StreamReader sr = new StreamReader("Accounts.txt"))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] data = line.Split(',');
+                        if (data[0] == txtLoginUserName.Text.Trim() &&
+                           data[1] == txtLoginPassword.Text.Trim())
+                        {
+                            // login successful
+                            frmAccount account = new frmAccount();
+                            account.Show();
+                            this.Hide();
+                            break;
+
+
+                            //close login form and show account form
+                        }
+                        // login unsuccessful
+
+                        if (data[0] != txtLoginUserName.Text.Trim())
+                        {
+                            toolStripStatusLabel1.Text = "User name does not exist";
+                        }
+                        if (data[1] != txtLoginPassword.Text.Trim())
+                        {
+                            toolStripStatusLabel1.Text = "Incorrect Password";
+                        }
+                    }
+                }
+            }
         }
     }
+
+    public partial class frmAccount : Form
+    {
+            public frmAccount()
+        {
+            InitializeComponent();    
+        }
+          
+        
+    }
+}
 
     
 
