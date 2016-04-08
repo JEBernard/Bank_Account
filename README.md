@@ -28,6 +28,7 @@ Allow transfer of funds between savings and checking accounts.
 
 Update():  
 Update will run after a transaction such as a withdraw or deposit has been made. The total amounts will be updated accordingly. 
+
 Withdraw():
 Withdraw will subtract an amount from the total, indicating either a cash withdraw or a purchase. 
 
@@ -40,7 +41,7 @@ This method will run when a new account has been created. This will be a randoml
 
 AdvanceMonth(): 
 
-This will advance time to the next month and increment the total, savings and trading accounts accordingly. The total will be incremented by direct deposit (if set up) savings will be accrue interest every 12 months. The trading account will increment based on the CD purchased. 
+This will advance time to the next month and increment the total, savings and trading accounts accordingly. The total will be incremented by direct deposit (if set up) savings will be accrue interest every 12 months. 
 
 PrintReceipt(): 
 
@@ -52,11 +53,10 @@ Close the application.
 Requirements: 
 1. Allow opening of savings account.
 2. Allow manual deposits. 
-3. Read deposit slip document
-4. Write receipt document
-5. Calculate interests 
-6. Advance the date. 
-7. Tranfer funds
-8. Purchase CDs 
-9. Mature CDs
-10. Store & read account information to database. 
+3. Withdraw from accounts
+4. Read deposit slip document
+5. Write receipt document
+6. Calculate interests 
+7. Advance the date. 
+8. Tranfer funds
+
