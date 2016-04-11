@@ -18,8 +18,7 @@ using System.Windows.Forms;
 
 namespace Bank_Account
 {
-
-    
+ 
     struct Account  // Account structure with a Username and Password field
     {
         public string Username;
@@ -200,11 +199,19 @@ namespace Bank_Account
     {
             public frmAccount()
         {
-            InitializeComponent();    
+            InitializeComponent();
+            txtCheckingBal.Text = Totals.checkingTotal.ToString("c");
+            txtSavingsBal.Text = Totals.savingsTotal.ToString("c"); 
         }
           
         
     }
+    public static class Totals
+    {
+        public static double checkingTotal;
+        public static double savingsTotal;
+    }
+
 }
 
     
