@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 
 /// <summary>
@@ -18,22 +18,25 @@ using System.Windows.Forms;
 
 namespace Bank_Account
 {
- 
+
+
     struct Account  // Account structure with a Username and Password field
     {
         public string Username;
         public string Password;
     }
 
-    public  partial class frmLogin : Form
+    public partial class frmLogin : Form
     {
-       
 
-        List<Account> AccountList = new List<Account>(); 
+        private LoginsDatasetTableAdapters.LoginsTableAdapter loginAdapter =
+            new LoginsDatasetTableAdapters.LoginsTableAdapter();
+
+        List<Account> AccountList = new List<Account>();
         public frmLogin()
         {
             InitializeComponent();
-   
+
         }
 
         public int NumberUpperCase(string str)
@@ -99,32 +102,12 @@ namespace Bank_Account
         private void Registration() // add validated Registration information and create new account
 
         {
-            Account newAccount = new Account();
-            newAccount.Username = txtRegUserName.Text;
-            newAccount.Password = txtRegPassword.Text;
-            AccountList.Add(newAccount); // add new account to list
-
-            using (StreamWriter SW = new StreamWriter("Accounts.txt")) // store the new account in Accounts.txt file
-            {
-                for (int i = 0; i < AccountList.Count; i++)
-                {
-                    SW.WriteLine(AccountList[i].Username + "," + AccountList[i].Password);
-                    toolStripStatusLabel1.Text = "Account created for: " + txtRegUserName.Text;
-                }
-            }
+          // add new account to database
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            /*
-           validate textboxes and confirm passwords match
-           Password Requirements: 
-           - >8 characters
-           - At least one upper case letter 
-           - At least one lower case letter
-           - At least one digit 
-           - At least one punctuation symbol 
-            */
+        
 
             const int MIN_LENGTH = 8;  // >8 characters
             string password = txtRegPassword.Text;
@@ -135,84 +118,54 @@ namespace Bank_Account
             }
 
             else {
-               
-                    if (password.Length >= MIN_LENGTH &&
-                    NumberUpperCase(password) >= 1 &&
-                    NumberLowerCase(password) >= 1 &&
-                    NumberDigits(password) >= 1 &&
-                    NumberPunctuation(password) >= 1)
-                    {
-                        Registration();
-                    }
-                    else
-                    {
-                        toolStripStatusLabel1.Text = "Password does not meet the requirements";
-                    }
+
+                if (password.Length >= MIN_LENGTH &&
+                NumberUpperCase(password) >= 1 &&
+                NumberLowerCase(password) >= 1 &&
+                NumberDigits(password) >= 1 &&
+                NumberPunctuation(password) >= 1)
+                {
+                    Registration();
                 }
-               
+                else
+                {
+                    toolStripStatusLabel1.Text = "Password does not meet the requirements";
+                }
             }
+
+        }
 
         private void btnLogin_Click_1(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtLoginUserName.Text))
+            string username = txtLoginUserName.Text;
+            string password = txtRegPassword.Text;
+
+
+            if (String.IsNullOrEmpty(txtLoginUserName.Text) || String.IsNullOrEmpty(txtLoginPassword.Text))
             {
-                toolStripStatusLabel1.Text = "No name entered";
+                toolStripStatusLabel1.Text = "Please enter a username and  password";
             }
-            else {
+            else
+            {
+                toolStripStatusLabel1.Text = "Please enter a vaild login";
+            }
 
-
-                using (StreamReader sr = new StreamReader("Accounts.txt"))
-                {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        string[] data = line.Split(',');
-                        if (data[0] == txtLoginUserName.Text.Trim() &&
-                           data[1] == txtLoginPassword.Text.Trim())
-                        {
-                            // login successful
-                            frmAccount account = new frmAccount();
-                            account.Show();
-                            this.Hide();
-                            break;
-
-
-                            //close login form and show account form
-                        }
-                        // login unsuccessful
-
-                        if (data[0] != txtLoginUserName.Text.Trim())
-                        {
-                            toolStripStatusLabel1.Text = "User name does not exist";
-                        }
-                        if (data[1] != txtLoginPassword.Text.Trim())
-                        {
-                            toolStripStatusLabel1.Text = "Incorrect Password";
-                        }
-                    }
-                }
+            if (loginAdapter.Search(loginAdapter.GetData(), username, password) > 0)
+            {
+                // display Account form  
+            }
+            else if (loginAdapter.SearchByUsername(loginAdapter.GetData(), username) > 0)
+            {
+                toolStripStatusLabel1.Text = "Invalid password";
+            }
+            else
+            {
+                toolStripStatusLabel1.Text = "Invalid credentials";
             }
         }
-    }
 
-    public partial class frmAccount : Form
-    {
-            public frmAccount()
-        {
-            InitializeComponent();
-            txtCheckingBal.Text = Totals.checkingTotal.ToString("c");
-            txtSavingsBal.Text = Totals.savingsTotal.ToString("c"); 
-        }
-          
-        
-    }
-    public static class Totals
-    {
-        public static double checkingTotal;
-        public static double savingsTotal;
-    }
+        } 
 
-}
-
-    
+    }
+  
 
