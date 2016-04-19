@@ -31,7 +31,7 @@ namespace Bank_Account
             username = txtLoginUserName.Text;
             string password = txtLoginPassword.Text;
 
-            if (String.IsNullOrEmpty(txtLoginUserName.Text) || String.IsNullOrEmpty(txtLoginPassword.Text))
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
                 toolStripStatusLabel1.Text = "Please enter a username and  password";
             }
@@ -65,7 +65,7 @@ namespace Bank_Account
             // generate account number
 
             Random generator = new Random();
-            accountNumber = generator.Next(0, 5);
+            accountNumber = generator.Next(0, 5);  // TODO: This will only generate a one digit number. 
 
             // add new account to database
             try
