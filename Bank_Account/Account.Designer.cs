@@ -1,6 +1,6 @@
 ﻿namespace Bank_Account
 {
-    partial class frmAccount
+     partial class frmAccount   
     {
         /// <summary>
         /// Required designer variable.
@@ -102,6 +102,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // lblWelcome
             // 
@@ -200,6 +201,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmAccount";
             this.Text = "Account";
+            this.Load += new System.EventHandler(this.frmAccount_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);

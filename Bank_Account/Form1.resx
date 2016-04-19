@@ -285,9 +285,6 @@
   <data name="txtLoginPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>105, 62</value>
   </data>
-  <data name="txtLoginPassword.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
-    <value>*</value>
-  </data>
   <data name="txtLoginPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 20</value>
   </data>
@@ -487,10 +484,10 @@
     <value>4</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 90</value>
+    <value>16, 36</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 147</value>
+    <value>302, 147</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -517,7 +514,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 259</value>
+    <value>333, 205</value>
   </data>
   <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
