@@ -10,6 +10,8 @@ namespace Bank_Account
 {
     public partial class frmLogin : Form
     {
+        public string accountNumber; 
+        
         private static string username;
 
         public static string Username
@@ -52,6 +54,14 @@ namespace Bank_Account
                 toolStripStatusLabel1.Text = "Invalid credentials";
             }
         }
+        
+        private void GenerateAccountNumber()  
+        // generate a random 6 digit number
+        {
+            Random generator = new Random(); 
+            var x = generator.Next(0, 1000000); 
+            accountNumber = x.ToString("000000"); 
+        }
 
         private void Registration() // add validated Registration information and create new account
 
@@ -60,17 +70,12 @@ namespace Bank_Account
             string Password = txtRegPassword.Text;
             decimal CheckingBalance = 0m;
             decimal SavingsBalance = 0m;
-            int accountNumber = 0;
-
-            // generate account number
-
-            Random generator = new Random();
-            accountNumber = generator.Next(0, 5);  // TODO: This will only generate a one digit number. 
-
+            
+            GenerateAccountNumber(); 
             // add new account to database
             try
             {
-                accountAdapter.Insert(Username, Password, CheckingBalance, SavingsBalance, accountNumber);
+                accountAdapter.Insert(Username, Password, CheckingBalance, SavingsBalance, accountNumber); // TODO: update Account Number in data table to nvchar
                 toolStripStatusLabel1.Text = "Account added successfully";
             }
             catch
