@@ -58,14 +58,14 @@ namespace Bank_Account
         {
             string Username = txtRegUserName.Text;
             string Password = txtRegPassword.Text;
-            decimal CheckingBalance = 0m;
-            decimal SavingsBalance = 0m;
-            int accountNumber = 0;
+            int CheckingBalance = 50;
+            int SavingsBalance = 0;
+            int accountNumber;
 
             // generate account number
 
             Random generator = new Random();
-            accountNumber = generator.Next(0, 5);  // TODO: This will only generate a one digit number. 
+            accountNumber = generator.Next(0, 1000000);
 
             // add new account to database
             try

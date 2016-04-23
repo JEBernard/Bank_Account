@@ -12,15 +12,15 @@ namespace Bank_Account
 
         private void btnDepositOk_Click(object sender, EventArgs e)
         {
-            double depositCheckingAmount = Double.Parse(txtDepositChecking.Text); // TODO: add a try parse and validate blank
-            frmAccount.checkingTotal += depositCheckingAmount;
+            int depositCheckingAmount = int.Parse(txtDepositChecking.Text); // TODO: add a try parse and validate blank
+            frmAccount.CheckingBalance += depositCheckingAmount;
             string savings = txtDepositSavings.Text;
-            double depositSavingsAmount = 0;
+            int depositSavingsAmount = 0;
             try
             {
-                if (double.TryParse(savings, out depositSavingsAmount) || !frmAccount.openSavings)
+                if (int.TryParse(savings, out depositSavingsAmount) || !frmAccount.openSavings)
                 {
-                    frmAccount.savingsTotal += depositSavingsAmount; // TODO: insert to database
+                    frmAccount.SavingsBalance += depositSavingsAmount; // TODO: insert to database
                     this.Hide();
                 }
             }
