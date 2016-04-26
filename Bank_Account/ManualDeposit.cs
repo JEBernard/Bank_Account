@@ -5,6 +5,9 @@ namespace Bank_Account
 {
     public partial class ManualDeposit : Form
     {
+        private AccountsDataSetTableAdapters.AccountsTableAdapter accountAdapter =
+            new AccountsDataSetTableAdapters.AccountsTableAdapter();
+
         public ManualDeposit()
         {
             InitializeComponent();
@@ -12,16 +15,32 @@ namespace Bank_Account
 
         private void btnDepositOk_Click(object sender, EventArgs e)
         {
-            int depositCheckingAmount = int.Parse(txtDepositChecking.Text); // TODO: add a try parse and validate blank
-            frmAccount.CheckingBalance += depositCheckingAmount;
-            string savings = txtDepositSavings.Text;
-            int depositSavingsAmount = 0;
+            string checking = txtDepositChecking.Text;
+            double depositCheckingAmount = 0;
+
             try
             {
-                if (int.TryParse(savings, out depositSavingsAmount) || !frmAccount.openSavings)
+                if (double.TryParse(checking, out depositCheckingAmount))
                 {
-                    frmAccount.SavingsBalance += depositSavingsAmount; // TODO: insert to database
-                    this.Hide();
+                    string username = frmLogin.Username;
+                    accountAdapter.Deposit(username, "Checking", depositCheckingAmount);
+                    this.Close();
+                }
+            }
+            catch
+            {
+                toolStripStatusLabel1.Text = "Please enter a valid checking amount";
+            }
+
+            string savings = txtDepositSavings.Text;
+            double depositSavingsAmount = 0;
+
+            try
+            {
+                if (double.TryParse(savings, out depositSavingsAmount) || !frmAccount.openSavings)
+                {
+                    string username = frmLogin.Username;
+                    accountAdapter.Deposit(username, "Savings", depositSavingsAmount);
                 }
             }
             catch

@@ -202,6 +202,7 @@
             // 
             // frmLogin
             // 
+            this.AcceptButton = this.btnLogin;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabLogin);

@@ -58,8 +58,8 @@ namespace Bank_Account
         {
             string Username = txtRegUserName.Text;
             string Password = txtRegPassword.Text;
-            int CheckingBalance = 50;
-            int SavingsBalance = 0;
+            decimal CheckingBalance = 50;
+            decimal SavingsBalance = 0;
             int accountNumber;
 
             // generate account number
@@ -86,7 +86,7 @@ namespace Bank_Account
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

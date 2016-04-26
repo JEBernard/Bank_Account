@@ -86,6 +86,7 @@
             this.scanToolStripMenuItem.Name = "scanToolStripMenuItem";
             this.scanToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.scanToolStripMenuItem.Text = "Scan";
+            this.scanToolStripMenuItem.Click += new System.EventHandler(this.scanToolStripMenuItem_Click);
             // 
             // manualDepositToolStripMenuItem
             // 
