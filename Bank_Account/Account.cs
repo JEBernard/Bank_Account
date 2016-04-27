@@ -23,21 +23,16 @@ namespace Bank_Account
             get { return savingsamount; }
             set { savingsamount = value;  }
         }
-        
-
 
         int c = 0;
 
        public static DateTime datetime = new DateTime();
-
-
-        public static double directDeposit; 
+       public static double directDeposit; 
         
         private AccountsDataSetTableAdapters.AccountsTableAdapter accountAdapter =
             new AccountsDataSetTableAdapters.AccountsTableAdapter();
 
         public static bool openSavings = false;
-
 
         private void manualDepositToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -64,10 +59,6 @@ namespace Bank_Account
 
         public  void ReadData()
         {
-            
-
-
-
             // TODO: fix connection string
 
             SqlConnection connection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\JEBernard\Documents\Visual Studio 2015\Projects\Bank_Account\Bank_Account\bin\Debug\Accounts.mdf;Integrated Security = True");
@@ -77,7 +68,6 @@ namespace Bank_Account
          
                 savingsamount = double.Parse(accountAdapter.GetTotal("Savings", username).ToString());
                 txtSavingsBal.Text = savingsamount.ToString("C");
-
 
             //SqlCommand command =
             //  new SqlCommand("SELECT * FROM dbo.Accounts WHERE Username ='" + username + "'", connection);
