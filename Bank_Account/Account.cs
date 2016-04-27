@@ -203,6 +203,10 @@ namespace Bank_Account
             // deposit direct deposit amount.  
             lblTime.Text = datetime.AddMonths(c).ToString("MMM. dd, yyyy");
             accountAdapter.Deposit(username, "Checking", directDeposit, datetime);
+            
+            // check if savings accrues interest 
+            // get savings amount and add interest -> deposit
+            
             ReadData(); 
             
         }
