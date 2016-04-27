@@ -35,6 +35,12 @@ namespace Bank_Account
         {
             InitializeComponent();
         }
+        
+        // FormLoad 
+        // create test account 
+        // accountAdapter.NewAccount("Test", "Password", 100, 0, "123456"); 
+        // display text notifying test account created. 
+        
 
         private void btnLogin_Click_1(object sender, EventArgs e)
         {
@@ -63,7 +69,7 @@ namespace Bank_Account
             }
         }
 
-        private void Registration() // add validated Registration information and create new account
+        private void Registration() // create new account 
 
         {
             string Username = txtRegUserName.Text;
