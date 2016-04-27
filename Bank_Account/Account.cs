@@ -9,6 +9,23 @@ namespace Bank_Account
     partial class frmAccount : Form
     {
         string username = frmLogin.Username;
+      private static  double checkingamount;
+      private static  double savingsamount;
+
+        public static double CheckingBalance
+        {
+            get { return checkingamount;  }
+            set { checkingamount = value;  }
+        }
+
+        public static double SavingsBalance
+        {
+            get { return savingsamount; }
+            set { savingsamount = value;  }
+        }
+        
+
+
         int c = 0;
 
        public static DateTime datetime = new DateTime();
@@ -47,8 +64,7 @@ namespace Bank_Account
 
         public  void ReadData()
         {
-            double checkingamount;
-            double savingsamount;
+            
 
 
 
