@@ -9,8 +9,8 @@ namespace Bank_Account
     partial class frmAccount : Form
     {
         string username = frmLogin.Username;
-      private static  double checkingamount;
-      private static  double savingsamount;
+        private static  double checkingamount;
+        private static  double savingsamount;
 
         public static double CheckingBalance
         {
