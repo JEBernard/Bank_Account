@@ -34,7 +34,12 @@
             this.scanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSavingsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.withdrawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setUpDirectoDepositToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.advanceMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -46,6 +51,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblAccountNumber = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -55,7 +62,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(511, 24);
@@ -67,6 +75,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.depositCheckToolStripMenuItem,
             this.openSavingsAccountToolStripMenuItem,
+            this.transferToolStripMenuItem,
+            this.withdrawToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -102,6 +112,18 @@
             this.openSavingsAccountToolStripMenuItem.Text = "Open &Savings Account";
             this.openSavingsAccountToolStripMenuItem.Click += new System.EventHandler(this.openSavingsAccountToolStripMenuItem_Click);
             // 
+            // transferToolStripMenuItem
+            // 
+            this.transferToolStripMenuItem.Name = "transferToolStripMenuItem";
+            this.transferToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.transferToolStripMenuItem.Text = "Transfer";
+            // 
+            // withdrawToolStripMenuItem
+            // 
+            this.withdrawToolStripMenuItem.Name = "withdrawToolStripMenuItem";
+            this.withdrawToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.withdrawToolStripMenuItem.Text = "Withdraw";
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -109,10 +131,33 @@
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setUpDirectoDepositToolStripMenuItem,
+            this.advanceMonthToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // setUpDirectoDepositToolStripMenuItem
+            // 
+            this.setUpDirectoDepositToolStripMenuItem.Name = "setUpDirectoDepositToolStripMenuItem";
+            this.setUpDirectoDepositToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.setUpDirectoDepositToolStripMenuItem.Text = "Set up Direct Deposit";
+            this.setUpDirectoDepositToolStripMenuItem.Click += new System.EventHandler(this.setUpDirectoDepositToolStripMenuItem_Click);
+            // 
+            // advanceMonthToolStripMenuItem
+            // 
+            this.advanceMonthToolStripMenuItem.Name = "advanceMonthToolStripMenuItem";
+            this.advanceMonthToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.advanceMonthToolStripMenuItem.Text = "Advance Month";
+            this.advanceMonthToolStripMenuItem.Click += new System.EventHandler(this.advanceMonthToolStripMenuItem_Click);
+            // 
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Location = new System.Drawing.Point(174, 48);
+            this.lblWelcome.Location = new System.Drawing.Point(174, 43);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(0, 13);
             this.lblWelcome.TabIndex = 1;
@@ -209,19 +254,42 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
+            // lblAccountNumber
+            // 
+            this.lblAccountNumber.AutoSize = true;
+            this.lblAccountNumber.Location = new System.Drawing.Point(174, 66);
+            this.lblAccountNumber.Name = "lblAccountNumber";
+            this.lblAccountNumber.Size = new System.Drawing.Size(93, 13);
+            this.lblAccountNumber.TabIndex = 5;
+            this.lblAccountNumber.Text = "Account Number: ";
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Location = new System.Drawing.Point(383, 43);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(30, 13);
+            this.lblTime.TabIndex = 6;
+            this.lblTime.Text = "Time";
+            // 
             // frmAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(511, 512);
+            this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.lblAccountNumber);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAccount";
             this.Text = "Account";
+            this.Activated += new System.EventHandler(this.frmAccount_Activated);
             this.Load += new System.EventHandler(this.frmAccount_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -256,5 +324,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Label lblAccountNumber;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setUpDirectoDepositToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem advanceMonthToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transferToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem withdrawToolStripMenuItem;
     }
 }

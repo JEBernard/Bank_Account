@@ -10,12 +10,22 @@ namespace Bank_Account
 {
     public partial class frmLogin : Form
     {
+
+      
         private static string username;
 
         public static string Username
         {
             get { return username; }
             set { username = value; }
+        }
+
+        private static string accountnumber; 
+
+        public static string AccountNumber
+        {
+            get { return accountnumber;  }
+            set { accountnumber = value;  }
         }
 
         private AccountsDataSetTableAdapters.AccountsTableAdapter accountAdapter =
@@ -58,19 +68,21 @@ namespace Bank_Account
         {
             string Username = txtRegUserName.Text;
             string Password = txtRegPassword.Text;
-            decimal CheckingBalance = 50;
-            decimal SavingsBalance = 0;
-            int accountNumber;
+            double CheckingBalance = 50;
+            double SavingsBalance = 0;
+           
 
             // generate account number
 
             Random generator = new Random();
-            accountNumber = generator.Next(0, 1000000);
+            accountnumber = generator.Next(0, 1000000).ToString("D6"); 
 
             // add new account to database
             try
             {
-                accountAdapter.Insert(Username, Password, CheckingBalance, SavingsBalance, accountNumber);
+                accountAdapter.NewAccount(Username, Password, CheckingBalance, SavingsBalance, accountnumber);
+                accountAdapter.Deposit(Username, "Checking", CheckingBalance, DateTime.Now);
+                accountAdapter.Deposit(Username, "Savings", SavingsBalance, DateTime.Now); 
                 toolStripStatusLabel1.Text = "Account added successfully";
             }
             catch

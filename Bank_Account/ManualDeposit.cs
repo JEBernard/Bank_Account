@@ -5,6 +5,7 @@ namespace Bank_Account
 {
     public partial class ManualDeposit : Form
     {
+   
         private AccountsDataSetTableAdapters.AccountsTableAdapter accountAdapter =
             new AccountsDataSetTableAdapters.AccountsTableAdapter();
 
@@ -16,18 +17,17 @@ namespace Bank_Account
         private void btnDepositOk_Click(object sender, EventArgs e)
         {
             string checking = txtDepositChecking.Text;
-            double depositCheckingAmount = 0;
+            double depositCheckingAmount;
 
-            try
+
+            if (double.TryParse(checking, out depositCheckingAmount))
             {
-                if (double.TryParse(checking, out depositCheckingAmount))
-                {
-                    string username = frmLogin.Username;
-                    accountAdapter.Deposit(username, "Checking", depositCheckingAmount);
-                    this.Close();
-                }
+
+                accountAdapter.Deposit(frmLogin.Username, "Checking", depositCheckingAmount, frmAccount.datetime);
+
+                // TODO: print receipt 
             }
-            catch
+            else
             {
                 toolStripStatusLabel1.Text = "Please enter a valid checking amount";
             }
@@ -35,18 +35,18 @@ namespace Bank_Account
             string savings = txtDepositSavings.Text;
             double depositSavingsAmount = 0;
 
-            try
-            {
+          
                 if (double.TryParse(savings, out depositSavingsAmount) || !frmAccount.openSavings)
                 {
-                    string username = frmLogin.Username;
-                    accountAdapter.Deposit(username, "Savings", depositSavingsAmount);
+                    
+                    accountAdapter.Deposit(frmLogin.Username, "Savings", depositSavingsAmount, frmAccount.datetime);
+                    
+                    // TODO: print receipt
+                }    
+                else
+                {
+                    toolStripStatusLabel1.Text = "Please enter a valid savings amount";
                 }
-            }
-            catch
-            {
-                toolStripStatusLabel1.Text = "Please enter a valid savings amount";
-            }
         }
 
         private void ManualDeposit_Load(object sender, EventArgs e)
@@ -59,6 +59,11 @@ namespace Bank_Account
             {
                 txtDepositSavings.Enabled = true;
             }
+        }
+
+        private void btnDepositClose_Click(object sender, EventArgs e)
+        {
+            this.Close(); 
         }
     }
 }

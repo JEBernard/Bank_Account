@@ -1,6 +1,6 @@
 ﻿namespace Bank_Account
 {
-    partial class ManualDeposit
+    partial class frmWithdraw
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnDepositClose = new System.Windows.Forms.Button();
+            this.btnDepositOk = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDepositSavings = new System.Windows.Forms.TextBox();
             this.txtDepositChecking = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnDepositOk = new System.Windows.Forms.Button();
-            this.btnDepositClose = new System.Windows.Forms.Button();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnDepositClose
+            // 
+            this.btnDepositClose.Location = new System.Drawing.Point(12, 215);
+            this.btnDepositClose.Name = "btnDepositClose";
+            this.btnDepositClose.Size = new System.Drawing.Size(88, 27);
+            this.btnDepositClose.TabIndex = 7;
+            this.btnDepositClose.Text = "&Close";
+            this.btnDepositClose.UseVisualStyleBackColor = true;
+            // 
+            // btnDepositOk
+            // 
+            this.btnDepositOk.Location = new System.Drawing.Point(184, 215);
+            this.btnDepositOk.Name = "btnDepositOk";
+            this.btnDepositOk.Size = new System.Drawing.Size(88, 27);
+            this.btnDepositOk.TabIndex = 6;
+            this.btnDepositOk.Text = "&Ok";
+            this.btnDepositOk.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(213, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Please enter the amount to withdraw below:";
             // 
             // groupBox1
             // 
@@ -49,12 +72,12 @@
             this.groupBox1.Controls.Add(this.txtDepositChecking);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 67);
+            this.groupBox1.Location = new System.Drawing.Point(12, 60);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(260, 149);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Deposit";
+            this.groupBox1.Text = "Withdraw";
             // 
             // txtDepositSavings
             // 
@@ -88,81 +111,22 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Checking:";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(208, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Please enter the amount to deposit below: ";
-            // 
-            // btnDepositOk
-            // 
-            this.btnDepositOk.Location = new System.Drawing.Point(184, 222);
-            this.btnDepositOk.Name = "btnDepositOk";
-            this.btnDepositOk.Size = new System.Drawing.Size(88, 27);
-            this.btnDepositOk.TabIndex = 2;
-            this.btnDepositOk.Text = "&Ok";
-            this.btnDepositOk.UseVisualStyleBackColor = true;
-            this.btnDepositOk.Click += new System.EventHandler(this.btnDepositOk_Click);
-            // 
-            // btnDepositClose
-            // 
-            this.btnDepositClose.Location = new System.Drawing.Point(12, 222);
-            this.btnDepositClose.Name = "btnDepositClose";
-            this.btnDepositClose.Size = new System.Drawing.Size(88, 27);
-            this.btnDepositClose.TabIndex = 3;
-            this.btnDepositClose.Text = "&Close";
-            this.btnDepositClose.UseVisualStyleBackColor = true;
-            this.btnDepositClose.Click += new System.EventHandler(this.btnDepositClose_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 252);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(284, 22);
-            this.statusStrip1.TabIndex = 4;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 25);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(208, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Please enter the amount to deposit below: ";
-            // 
-            // ManualDeposit
+            // frmWithdraw
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 274);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.btnDepositClose);
             this.Controls.Add(this.btnDepositOk);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ManualDeposit";
+            this.Name = "frmWithdraw";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Deposit";
-            this.Load += new System.EventHandler(this.ManualDeposit_Load);
+            this.Text = "Withdraw";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,16 +134,13 @@
 
         #endregion
 
+        private System.Windows.Forms.Button btnDepositClose;
+        private System.Windows.Forms.Button btnDepositOk;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtDepositSavings;
         private System.Windows.Forms.TextBox txtDepositChecking;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnDepositOk;
-        private System.Windows.Forms.Button btnDepositClose;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.Label label6;
     }
 }
