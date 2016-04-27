@@ -130,6 +130,8 @@ namespace Bank_Account
             //first check if check.txt file exists
 
             string dir = Directory.GetCurrentDirectory();
+            string filename = "check.txt"; 
+            string path = Path.Combine(dir, filename); 
 
             if (File.Exists(dir + @"\check.txt"))
             {
@@ -165,8 +167,29 @@ namespace Bank_Account
             }
             else
             {
-                toolStripStatusLabel1.Text = "Unable to read file."; 
+                // create check.txt 
+                DialogResult result = MessageBox.Show("Check not found, would you like to create one?", "Check", MessageBoxButtons.YesNo); 
+                if (result == DialogResult.Yes)
+                {
+                    CreateCheck();
+                    toolStripStatusLabel1.Text = "Check was created successfully."
+                    // run scan 
+                    // scanToolStripMenuItem_Click(); 
+                    
+                }
+                
             }
+        }
+        
+        private void CreateCheck() 
+        {
+            using (Streamwriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine("**********"); 
+                    sw.WriteLine("Account Number" + frmLogin.AccountNumber); 
+                    sw.WriteLine("Check Amount: 100"); 
+                }
+                toolStripStatusLabel1.Text = "Check created"; 
         }
 
         private void frmAccount_Activated(object sender, EventArgs e)
