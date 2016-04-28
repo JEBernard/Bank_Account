@@ -42,11 +42,9 @@
             this.advanceMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.txtCheckingBal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.txtSavingsBal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -117,12 +115,14 @@
             this.transferToolStripMenuItem.Name = "transferToolStripMenuItem";
             this.transferToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.transferToolStripMenuItem.Text = "Transfer";
+            this.transferToolStripMenuItem.Click += new System.EventHandler(this.transferToolStripMenuItem_Click);
             // 
             // withdrawToolStripMenuItem
             // 
             this.withdrawToolStripMenuItem.Name = "withdrawToolStripMenuItem";
             this.withdrawToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.withdrawToolStripMenuItem.Text = "Withdraw";
+            this.withdrawToolStripMenuItem.Click += new System.EventHandler(this.withdrawToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -164,7 +164,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.txtCheckingBal);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(62, 91);
@@ -173,16 +172,6 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Checking Account";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(228, 83);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "View Transactions";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtCheckingBal
             // 
@@ -203,7 +192,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.txtSavingsBal);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(62, 327);
@@ -212,15 +200,6 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Savings Account";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(228, 78);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "View Transactions";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // txtSavingsBal
             // 
@@ -288,6 +267,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAccount";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Account";
             this.Activated += new System.EventHandler(this.frmAccount_Activated);
             this.Load += new System.EventHandler(this.frmAccount_Load);
@@ -315,11 +295,9 @@
         private System.Windows.Forms.ToolStripMenuItem scanToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manualDepositToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtCheckingBal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtSavingsBal;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;

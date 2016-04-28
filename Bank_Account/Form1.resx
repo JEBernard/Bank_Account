@@ -285,6 +285,9 @@
   <data name="txtLoginPassword.Location" type="System.Drawing.Point, System.Drawing">
     <value>105, 62</value>
   </data>
+  <data name="txtLoginPassword.PasswordChar" type="System.Char, mscorlib" xml:space="preserve">
+    <value>*</value>
+  </data>
   <data name="txtLoginPassword.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 20</value>
   </data>

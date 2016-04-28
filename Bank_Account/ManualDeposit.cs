@@ -19,7 +19,7 @@ namespace Bank_Account
             string checking = txtDepositChecking.Text;
             double depositCheckingAmount;
 
-            if (double.TryParse(checking, out depositCheckingAmount))
+            if (double.TryParse(checking, out depositCheckingAmount) && depositCheckingAmount > 0)
             {
                 accountAdapter.Deposit(frmLogin.Username, "Checking", depositCheckingAmount, frmAccount.datetime);
 
@@ -34,19 +34,26 @@ namespace Bank_Account
                     {
                         sw.WriteLine(rtext);
                         toolStripStatusLabel1.Text = "Receipt has printed successfully";
+                        return; 
                     }
                 }
-                else return;
+                else
+                {
+                    toolStripStatusLabel1.Text = depositCheckingAmount.ToString("C") + " has been deposited in to Checking.";
+                    return; 
+                }
             }
             else
             {
                 toolStripStatusLabel1.Text = "Please enter a valid checking amount";
+               
             }
+
 
             string savings = txtDepositSavings.Text;
             double depositSavingsAmount = 0;
 
-            if (double.TryParse(savings, out depositSavingsAmount) && frmAccount.openSavings)
+            if (double.TryParse(savings, out depositSavingsAmount) && frmAccount.openSavings && depositSavingsAmount > 0)
             {
                 double newbal = frmAccount.SavingsBalance += depositSavingsAmount;
                 string rtext = depositSavingsAmount.ToString("C") + " was deposited in to Savings at " + frmAccount.datetime + " \n Your new balance is " + newbal.ToString("C");
@@ -56,7 +63,7 @@ namespace Bank_Account
                 DialogResult result = MessageBox.Show("Would you like to print a receipt?", "Receipt", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
-                    string filename = String.Format("{0:yyyy-MM-dd}__{1}", DateTime.Now, "Savings.txt");
+                    string filename = String.Format("{0:yyyy-MM-dd}__{1}", frmAccount.datetime, "Savings.txt");
                     string path = Path.Combine(Directory.GetCurrentDirectory(), filename);
                     using (StreamWriter sw = File.CreateText(path))
                     {
@@ -64,10 +71,15 @@ namespace Bank_Account
                         toolStripStatusLabel1.Text = "Receipt has printed successfully";
                     }
                 }
+                else
+                {
+                    toolStripStatusLabel1.Text = depositSavingsAmount.ToString("C") + " has been deposited in to Savings."; 
+                }
             }
             else
             {
                 toolStripStatusLabel1.Text = "Please enter a valid savings amount";
+                return; 
             }
         }
 

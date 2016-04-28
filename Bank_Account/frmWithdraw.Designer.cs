@@ -28,105 +28,112 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDepositClose = new System.Windows.Forms.Button();
-            this.btnDepositOk = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnWithdrawClose = new System.Windows.Forms.Button();
+            this.btnWithdrawOK = new System.Windows.Forms.Button();
+            this.lblMain = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtDepositSavings = new System.Windows.Forms.TextBox();
-            this.txtDepositChecking = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.cboWithdraw = new System.Windows.Forms.ComboBox();
+            this.txtWithdraw = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnDepositClose
+            // btnWithdrawClose
             // 
-            this.btnDepositClose.Location = new System.Drawing.Point(12, 215);
-            this.btnDepositClose.Name = "btnDepositClose";
-            this.btnDepositClose.Size = new System.Drawing.Size(88, 27);
-            this.btnDepositClose.TabIndex = 7;
-            this.btnDepositClose.Text = "&Close";
-            this.btnDepositClose.UseVisualStyleBackColor = true;
+            this.btnWithdrawClose.Location = new System.Drawing.Point(12, 215);
+            this.btnWithdrawClose.Name = "btnWithdrawClose";
+            this.btnWithdrawClose.Size = new System.Drawing.Size(88, 27);
+            this.btnWithdrawClose.TabIndex = 7;
+            this.btnWithdrawClose.Text = "&Close";
+            this.btnWithdrawClose.UseVisualStyleBackColor = true;
+            this.btnWithdrawClose.Click += new System.EventHandler(this.btnWithdrawClose_Click);
             // 
-            // btnDepositOk
+            // btnWithdrawOK
             // 
-            this.btnDepositOk.Location = new System.Drawing.Point(184, 215);
-            this.btnDepositOk.Name = "btnDepositOk";
-            this.btnDepositOk.Size = new System.Drawing.Size(88, 27);
-            this.btnDepositOk.TabIndex = 6;
-            this.btnDepositOk.Text = "&Ok";
-            this.btnDepositOk.UseVisualStyleBackColor = true;
+            this.btnWithdrawOK.Location = new System.Drawing.Point(227, 215);
+            this.btnWithdrawOK.Name = "btnWithdrawOK";
+            this.btnWithdrawOK.Size = new System.Drawing.Size(88, 27);
+            this.btnWithdrawOK.TabIndex = 6;
+            this.btnWithdrawOK.Text = "&Ok";
+            this.btnWithdrawOK.UseVisualStyleBackColor = true;
+            this.btnWithdrawOK.Click += new System.EventHandler(this.btnWithdrawOK_Click);
             // 
-            // label1
+            // lblMain
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Please enter the amount to withdraw below:";
+            this.lblMain.AutoSize = true;
+            this.lblMain.Location = new System.Drawing.Point(24, 18);
+            this.lblMain.Name = "lblMain";
+            this.lblMain.Size = new System.Drawing.Size(213, 13);
+            this.lblMain.TabIndex = 5;
+            this.lblMain.Text = "Please enter the amount to withdraw below:";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtDepositSavings);
-            this.groupBox1.Controls.Add(this.txtDepositChecking);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.cboWithdraw);
+            this.groupBox1.Controls.Add(this.txtWithdraw);
             this.groupBox1.Location = new System.Drawing.Point(12, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 149);
+            this.groupBox1.Size = new System.Drawing.Size(303, 110);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Withdraw";
             // 
-            // txtDepositSavings
+            // cboWithdraw
             // 
-            this.txtDepositSavings.Location = new System.Drawing.Point(100, 92);
-            this.txtDepositSavings.Name = "txtDepositSavings";
-            this.txtDepositSavings.Size = new System.Drawing.Size(140, 20);
-            this.txtDepositSavings.TabIndex = 3;
+            this.cboWithdraw.FormattingEnabled = true;
+            this.cboWithdraw.Items.AddRange(new object[] {
+            "Checking",
+            "Savings"});
+            this.cboWithdraw.Location = new System.Drawing.Point(15, 42);
+            this.cboWithdraw.Name = "cboWithdraw";
+            this.cboWithdraw.Size = new System.Drawing.Size(121, 21);
+            this.cboWithdraw.TabIndex = 3;
             // 
-            // txtDepositChecking
+            // txtWithdraw
             // 
-            this.txtDepositChecking.Location = new System.Drawing.Point(100, 35);
-            this.txtDepositChecking.Name = "txtDepositChecking";
-            this.txtDepositChecking.Size = new System.Drawing.Size(140, 20);
-            this.txtDepositChecking.TabIndex = 2;
+            this.txtWithdraw.Location = new System.Drawing.Point(157, 43);
+            this.txtWithdraw.Name = "txtWithdraw";
+            this.txtWithdraw.Size = new System.Drawing.Size(140, 20);
+            this.txtWithdraw.TabIndex = 2;
             // 
-            // label3
+            // statusStrip1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 95);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Savings:";
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 250);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(327, 22);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // label2
+            // toolStripStatusLabel1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Checking:";
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // frmWithdraw
             // 
+            this.AcceptButton = this.btnWithdrawOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.btnDepositClose);
-            this.Controls.Add(this.btnDepositOk);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(327, 272);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.btnWithdrawClose);
+            this.Controls.Add(this.btnWithdrawOK);
+            this.Controls.Add(this.lblMain);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmWithdraw";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Withdraw";
+            this.Load += new System.EventHandler(this.frmWithdraw_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,13 +141,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDepositClose;
-        private System.Windows.Forms.Button btnDepositOk;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnWithdrawClose;
+        private System.Windows.Forms.Button btnWithdrawOK;
+        private System.Windows.Forms.Label lblMain;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtDepositSavings;
-        private System.Windows.Forms.TextBox txtDepositChecking;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtWithdraw;
+        private System.Windows.Forms.ComboBox cboWithdraw;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }

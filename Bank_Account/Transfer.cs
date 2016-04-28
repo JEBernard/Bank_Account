@@ -1,11 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bank_Account
@@ -14,7 +7,7 @@ namespace Bank_Account
     {
         private AccountsDataSetTableAdapters.AccountsTableAdapter accountAdapter =
             new AccountsDataSetTableAdapters.AccountsTableAdapter();
-            
+
         public Transfer()
         {
             InitializeComponent();
@@ -22,49 +15,99 @@ namespace Bank_Account
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            string checkingTransfer = txtChecking.Text; 
-            double checkingTransferAmount;
-            string savingsTransfer = txtSavings.Text;
-            double savingsTransferAmount; 
+            if (!frmAccount.openSavings)
+            {
+                this.Close();
+            }
+            else {
 
-            var selectedFrom = fromComboBox.Text; 
-            var selectedTo = toComboBox.Text; 
-            
-            // transfer from checking to savings
-            if(double.TryParse(checkingTransfer, out checkingTransferAmount) &&  selectedFrom == "Checking" && selectedTo == "Savings") 
-            {
-                if(frmAccount.CheckingBalance > checkingTransferAmount)
+                var selectedFrom = fromComboBox.Text;
+                var selectedTo = toComboBox.Text;
+
+                // transfer from checking to savings
+                if (selectedFrom == "Checking" && selectedTo == "Savings")
                 {
-                    accountAdapter.Deposit(frmLogin.Username, "Savings", checkingTransferAmount, frmAccount.datetime);
-                    accountAdapter.Deposit(frmLogin.Username, "Checking", checkingTransferAmount *-1, frmAccount.datetime); 
-                    toolStripStatusLabel1.Text = checkingTransferAmount.ToString("C") + " has been transfered from Checking to Savings";
+                    TransferFromChecking();
                 }
-                else 
+                else if (selectedFrom == "Savings" && selectedTo == "Checking")
                 {
-                    toolStripStatusLabel1.Text = "Insufficient balance in Checking"; 
+                    TransferFromSavings();
                 }
             }
-            else 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TransferFromChecking()
+        {
+            string transfer = txtTransfer.Text;
+            double transferAmount;
+            var selectedFrom = fromComboBox.Text;
+            var selectedTo = toComboBox.Text;
+
+            try
             {
-                toolStripStatusLabel1.Text = "Please enter a valid transfer amount";     
+                if (double.TryParse(transfer, out transferAmount) && selectedFrom == "Checking" && selectedTo == "Savings" && transferAmount > 0)
+
+                    if (selectedFrom == "Checking" && selectedTo == "Savings" && frmAccount.CheckingBalance > transferAmount)
+                    {
+                        accountAdapter.Deposit(frmLogin.Username, "Savings", transferAmount, frmAccount.datetime);
+                        accountAdapter.Deposit(frmLogin.Username, "Checking", transferAmount * -1, frmAccount.datetime);
+                        toolStripStatusLabel1.Text = transferAmount.ToString("C") + " has been transfered from Checking to Savings";
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = "Insufficient balance in Checking";
+                    }
+                else return;
             }
-            
-            if(double.TryParse(savingsTransfer, out savingsTransferAmount) && selectedFrom == "Savings" && selectedTo == "Checking")
+            catch
             {
-                if(frmAccount.SavingsBalance > savingsTransferAmount)
-                {
-                    accountAdapter.Deposit(frmLogin.Username, "Checking", savingsTransferAmount, frmAccount.datetime); 
-                    accountAdapter.Deposit(frmLogin.Username, "Savings", savingsTransferAmount *-1, frmAccount.datetime); 
-                    toolStripStatusLabel1.Text = savingsTransferAmount.ToString("C") + " has been transfered from Savings to Checking"; 
-                }
-                else 
-                {
-                    toolStripStatusLabel1.Text = "Insufficient balance in Savings"; 
-                }
+                toolStripStatusLabel1.Text = "Please enter a valid transfer amount";
             }
-            else 
+        }
+
+        private void TransferFromSavings()
+        {
+            string transfer = txtTransfer.Text;
+            double transferAmount;
+            var selectedFrom = fromComboBox.Text;
+            var selectedTo = toComboBox.Text;
+
+            try
             {
-                toolStripStatusLabel1.Text = "Please enter a valid transfer amount"; 
+                if (double.TryParse(transfer, out transferAmount) && selectedFrom == "Savings" && selectedTo == "Checking" && transferAmount > 0 )
+
+                    if (frmAccount.SavingsBalance -4 > transferAmount)
+                    {
+                        accountAdapter.Deposit(frmLogin.Username, "Checking", transferAmount, frmAccount.datetime);
+                        accountAdapter.Deposit(frmLogin.Username, "Savings", transferAmount * -1, frmAccount.datetime);
+                        toolStripStatusLabel1.Text = transferAmount.ToString("C") + " has been transfered from Savings to Checking";
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = "Insufficient balance in Savings";
+                    }
+                else return;
+            }
+            catch
+            {
+                toolStripStatusLabel1.Text = "Please enter a valid transfer amount";
+            }
+        }
+
+        private void Transfer_Load(object sender, EventArgs e)
+        {
+            if (!frmAccount.openSavings)
+            {
+                fromComboBox.Enabled = false;
+                toComboBox.Enabled = false;
+                txtTransfer.Enabled = false;
+                label1.Text = "Please open a savings account first."; 
+               
             }
         }
     }

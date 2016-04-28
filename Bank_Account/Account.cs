@@ -8,27 +8,28 @@ namespace Bank_Account
 {
     partial class frmAccount : Form
     {
-        string username = frmLogin.Username;
-        private static  double checkingamount;
-        private static  double savingsamount;
+        private string username = frmLogin.Username;
+
+        private static double checkingamount;
+        private static double savingsamount;
 
         public static double CheckingBalance
         {
-            get { return checkingamount;  }
-            set { checkingamount = value;  }
+            get { return checkingamount; }
+            set { checkingamount = value; }
         }
 
         public static double SavingsBalance
         {
             get { return savingsamount; }
-            set { savingsamount = value;  }
+            set { savingsamount = value; }
         }
 
-        int c = 0;
+        private int c = 0;
 
-       public static DateTime datetime = new DateTime();
-       public static double directDeposit; 
-        
+        public static DateTime datetime = new DateTime();
+        public static double directDeposit;
+
         private AccountsDataSetTableAdapters.AccountsTableAdapter accountAdapter =
             new AccountsDataSetTableAdapters.AccountsTableAdapter();
 
@@ -39,7 +40,6 @@ namespace Bank_Account
             // open manual deposit form
             ManualDeposit deposit = new ManualDeposit();
             deposit.ShowDialog();
-            
         }
 
         public frmAccount()
@@ -51,37 +51,24 @@ namespace Bank_Account
         {
             ReadData();
             lblWelcome.Text = "Welcome to your account " + username + ".";
-            lblAccountNumber.Text = "Account Number: " + frmLogin.AccountNumber +".";
+            lblAccountNumber.Text = "Account Number: " + frmLogin.AccountNumber + ".";
             lblTime.Text = DateTime.Now.ToString("MMM.dd, yyyy");
-            datetime = Convert.ToDateTime(lblTime.Text); 
+            datetime = Convert.ToDateTime(lblTime.Text);
             openSavings = false;
         }
 
-        public  void ReadData()
+        public void ReadData()
         {
             // TODO: fix connection string
+ 
+            SqlConnection connection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Accounts.mdf;Integrated Security = True");
+            checkingamount = double.Parse(accountAdapter.GetTotal("Checking", username).ToString());
+            txtCheckingBal.Text = checkingamount.ToString("C");
 
-            SqlConnection connection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\JEBernard\Documents\Visual Studio 2015\Projects\Bank_Account\Bank_Account\bin\Debug\Accounts.mdf;Integrated Security = True");
-           
-                checkingamount = double.Parse(accountAdapter.GetTotal("Checking", username).ToString());
-                txtCheckingBal.Text = checkingamount.ToString("C");
-         
-                savingsamount = double.Parse(accountAdapter.GetTotal("Savings", username).ToString());
-                txtSavingsBal.Text = savingsamount.ToString("C");
+            savingsamount = double.Parse(accountAdapter.GetTotal("Savings", username).ToString());
+            txtSavingsBal.Text = savingsamount.ToString("C");
+          
 
-            //SqlCommand command =
-            //  new SqlCommand("SELECT * FROM dbo.Accounts WHERE Username ='" + username + "'", connection);
-            //connection.Open();
-            //SqlDataReader read = command.ExecuteReader();
-            //while (read.Read())
-            //{
-            //    checkingbal = int.Parse((read["Checking Balance"]).ToString());
-            //    savingsbal = int.Parse((read["Savings Balance"]).ToString());
-
-            //    AccountNumber = int.Parse((read["Account Number"]).ToString());
-            //    toolStripStatusLabel1.Text = ""; 
-            //}
-            //read.Close();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,7 +82,6 @@ namespace Bank_Account
             double savingsamount;
             checkingamount = double.Parse(accountAdapter.GetTotal("Checking", username).ToString());
             savingsamount = double.Parse(accountAdapter.GetTotal("Savings", username).ToString());
-           
 
             if (openSavings)
             {
@@ -104,10 +90,10 @@ namespace Bank_Account
             else if (checkingamount > 5)
             {
                 string username = frmLogin.Username;
-                accountAdapter.Deposit(username, "Savings", 5, datetime);     
+                accountAdapter.Deposit(username, "Savings", 5, datetime);
                 accountAdapter.Deposit(username, "Checking", -5, datetime);
                 openSavings = true;
-                ReadData(); 
+                ReadData();
             }
             else
             {
@@ -120,22 +106,16 @@ namespace Bank_Account
             OpenSavingsAccount();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-          
-        }
-
         private void scanToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //first check if check.txt file exists
 
             string dir = Directory.GetCurrentDirectory();
-            string filename = "check.txt"; 
-            string path = Path.Combine(dir, filename); 
+            string filename = "check.txt";
+            string path = Path.Combine(dir, filename);
 
             if (File.Exists(dir + @"\check.txt"))
             {
-
                 foreach (string line in File.ReadLines(dir + @"\check.txt"))
                 {
                     if (line.Contains(frmLogin.AccountNumber))
@@ -167,54 +147,81 @@ namespace Bank_Account
             }
             else
             {
-                // create check.txt 
-                DialogResult result = MessageBox.Show("Check not found, would you like to create one?", "Check", MessageBoxButtons.YesNo); 
+                // create check.txt
+                DialogResult result = MessageBox.Show("Check not found, would you like to create one?", "Check", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
                     CreateCheck();
-                    toolStripStatusLabel1.Text = "Check was created successfully."
-                    // run scan 
-                    // scanToolStripMenuItem_Click(); 
-                    
+                    toolStripStatusLabel1.Text = "Check was created successfully.";
+                    // run scan
+                    scanToolStripMenuItem_Click(sender, e);
                 }
-                
             }
         }
-        
-        private void CreateCheck() 
+
+        private void CreateCheck()
         {
-            using (Streamwriter sw = File.CreateText(path))
-                {
-                    sw.WriteLine("**********"); 
-                    sw.WriteLine("Account Number" + frmLogin.AccountNumber); 
-                    sw.WriteLine("Check Amount: 100"); 
-                }
-                toolStripStatusLabel1.Text = "Check created"; 
+            string dir = Directory.GetCurrentDirectory();
+            string filename = "check.txt";
+            string path = Path.Combine(dir, filename);
+
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine("*************************");
+                sw.WriteLine("Account Number: " + frmLogin.AccountNumber);
+                sw.WriteLine("Check Amount: 100");
+                sw.WriteLine("*************************");
+            }
+            toolStripStatusLabel1.Text = "Check created";
         }
 
         private void frmAccount_Activated(object sender, EventArgs e)
         {
-            ReadData(); 
+            ReadData();
+            toolStripStatusLabel1.Text = ""; 
+        }
+
+        public bool IsDivisible(int x, int n)
+        {
+            return (x % n) == 0; 
         }
 
         private void advanceMonthToolStripMenuItem_Click(object sender, EventArgs e)
         {
             c++;
-            // deposit direct deposit amount.  
+            // deposit direct deposit amount.
             lblTime.Text = datetime.AddMonths(c).ToString("MMM. dd, yyyy");
             accountAdapter.Deposit(username, "Checking", directDeposit, datetime);
-            
-            // check if savings accrues interest 
+
+            // check if savings accrues interest
             // get savings amount and add interest -> deposit
-            
-            ReadData(); 
-            
+            if (IsDivisible(c, 12))
+            {
+                var interest = 0.05;
+                var interestAmount = frmAccount.SavingsBalance * interest; 
+                accountAdapter.Deposit(frmLogin.Username, "Savings", interestAmount, frmAccount.datetime);
+                toolStripStatusLabel1.Text = "Savings has earned " + interestAmount.ToString("C") + " in Interest"; 
+            }
+
+            ReadData();
         }
 
         private void setUpDirectoDepositToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDirectDeposit dd = new frmDirectDeposit();
-            dd.ShowDialog(); 
+            dd.ShowDialog();
+        }
+
+        private void transferToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Transfer transfer = new Transfer();
+            transfer.ShowDialog();
+        }
+
+        private void withdrawToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmWithdraw withdraw = new frmWithdraw();
+            withdraw.ShowDialog();
         }
     }
 }
